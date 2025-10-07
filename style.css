@@ -593,3 +593,28 @@ body{margin:0;font-family:"Kanit",sans-serif;background:var(--bg);color:var(--te
 @media (max-width:480px){
   .hbd-img img{width:260px}
 }
+/* ==== แก้ปัญหาเค้กไม่แสดงในมือถือ ==== */
+.cake-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;        /* ป้องกันโดนตัด */
+  width: 100%;
+  margin-top: 40px;
+}
+
+.cake {
+  width: 100%;
+  max-width: 340px;         /* ปรับขนาดให้เหมาะกับจอมือถือ */
+  height: auto;
+  overflow: visible;        /* ให้ส่วนตกแต่งเช่นเทียนมองเห็นครบ */
+}
+
+@media (max-width: 480px) {
+  .cake-wrap {
+    margin-top: 20px;
+  }
+  .cake {
+    max-width: 300px;       /* ลดขนาดบนจอเล็ก */
+  }
+}
