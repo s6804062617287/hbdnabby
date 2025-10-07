@@ -248,3 +248,348 @@ a{text-decoration:none;color:inherit}
 @media (max-width:360px){
   .fold-card{ height: 58vw }
 }
+
+/* ===== Sky: starfield parallax (animate more) ===== */
+.starfield{
+  position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+}
+.stars{
+  position:absolute; inset:-10vh -10vw; /* ขยายรอบนอกนิดเพื่อเลื่อนแล้วไม่เห็นขอบ */
+  background-repeat:repeat;
+  will-change:transform, opacity;
+  mix-blend-mode:screen;
+  opacity:.8;
+}
+
+/* ชั้นดาว 3 ระดับ ความหนาแน่น/ขนาดต่างกัน */
+.layer1{
+  background-image:
+    radial-gradient(1.2px 1.2px at 10% 20%, rgba(255,255,255,.95) 40%, transparent 41%),
+    radial-gradient(1px 1px     at 40% 60%, rgba(255,255,255,.8)  40%, transparent 41%),
+    radial-gradient(1px 1px     at 70% 30%, rgba(255,255,255,.8)  40%, transparent 41%),
+    radial-gradient(1.4px 1.4px at 85% 80%, rgba(255,255,255,1)   40%, transparent 41%);
+  background-size: 600px 600px, 720px 720px, 680px 680px, 760px 760px;
+  animation: star-drift-1 90s linear infinite, star-twinkle 6s ease-in-out infinite;
+}
+.layer2{
+  background-image:
+    radial-gradient(1.4px 1.4px at 20% 10%, rgba(147,197,253,.95) 40%, transparent 41%),
+    radial-gradient(1.2px 1.2px at 60% 70%, rgba(34,211,238,.9)   40%, transparent 41%),
+    radial-gradient(1px 1px     at 30% 80%, rgba(255,255,255,.9)  40%, transparent 41%),
+    radial-gradient(1.2px 1.2px at 85% 20%, rgba(168,85,247,.9)   40%, transparent 41%);
+  background-size: 520px 520px, 560px 560px, 600px 600px, 540px 540px;
+  opacity:.7;
+  animation: star-drift-2 60s linear infinite, star-twinkle 7.5s ease-in-out infinite;
+}
+.layer3{
+  background-image:
+    radial-gradient(1.2px 1.2px at 15% 50%, rgba(255,255,255,.9) 40%, transparent 41%),
+    radial-gradient(1px 1px     at 75% 40%, rgba(96,165,250,.9)  40%, transparent 41%),
+    radial-gradient(1px 1px     at 55% 15%, rgba(34,211,238,.9)  40%, transparent 41%),
+    radial-gradient(1.2px 1.2px at 90% 75%, rgba(255,255,255,.95)40%, transparent 41%);
+  background-size: 440px 440px, 460px 460px, 480px 480px, 500px 500px;
+  opacity:.6;
+  animation: star-drift-3 40s linear infinite, star-twinkle 5.5s ease-in-out infinite;
+}
+
+/* ลอยช้า ๆ คนละทิศ/สปีด ให้เกิด parallax */
+@keyframes star-drift-1{
+  0%{ transform:translate3d(0,0,0) }
+  100%{ transform:translate3d(-6vw, -4vh, 0) }
+}
+@keyframes star-drift-2{
+  0%{ transform:translate3d(0,0,0) }
+  100%{ transform:translate3d(8vw, 6vh, 0) }
+}
+@keyframes star-drift-3{
+  0%{ transform:translate3d(0,0,0) }
+  100%{ transform:translate3d(-10vw, 5vh, 0) }
+}
+
+/* กระพริบเนียน ๆ (รวมถึงที่ .sky::before/after เดิมก็ยังใช้ได้) */
+@keyframes star-twinkle{
+  0%,100%{ opacity:.85; filter:brightness(1) }
+  50%{ opacity:.45; filter:brightness(1.12) }
+}
+
+/* ===== Clouds: เมฆจาง ๆ ลอยช้า ๆ ด้านบน ===== */
+.clouds{
+  position:absolute; inset:-10vh -10vw; z-index:1; pointer-events:none;
+  background:
+    radial-gradient(closest-side at 20% 40%, rgba(255,255,255,.06), transparent 60%),
+    radial-gradient(closest-side at 50% 60%, rgba(255,255,255,.04), transparent 62%),
+    radial-gradient(closest-side at 80% 35%, rgba(255,255,255,.05), transparent 58%);
+  filter: blur(18px) saturate(1.1);
+  animation: clouds-drift 120s linear infinite;
+  mix-blend-mode:screen;
+  opacity:.8;
+}
+@keyframes clouds-drift{
+  0%{ transform:translate3d(0,0,0) scale(1) }
+  50%{ transform:translate3d(-6vw, -2vh, 0) scale(1.05) }
+  100%{ transform:translate3d(0,0,0) scale(1) }
+}
+
+/* ===== Cake animations ===== */
+.cake-wrap{ position:relative; z-index:2 } /* อยู่เหนือเมฆ/ดาว */
+.float{
+  animation: cake-bob 4.6s ease-in-out infinite;
+  transform-origin:50% 100%;
+}
+@keyframes cake-bob{
+  0%,100%{ transform:translateY(0) rotate(0) }
+  50%{ transform:translateY(-6px) rotate(.6deg) }
+}
+
+/* เพิ่มประกายไฟเทียนนุ่ม ๆ */
+.candle.glow .fire{
+  filter: drop-shadow(0 0 6px rgba(255,186,8,.55))
+          drop-shadow(0 0 14px rgba(255,186,8,.35));
+}
+.candle.glow .glow{
+  animation: flame-pulse 1.6s ease-in-out infinite;
+}
+@keyframes flame-pulse{
+  0%,100%{ opacity:.45; transform:scale(1) }
+  50%{ opacity:.9; transform:scale(1.2) }
+}
+
+/* จานและครีมเค้ก “หายใจ” เบา ๆ */
+.plate{ animation: plate-breathe 6s ease-in-out infinite }
+.cream{ animation: cream-sheen 5.5s ease-in-out infinite }
+@keyframes plate-breathe{
+  0%,100%{ filter:brightness(1) }
+  50%{ filter:brightness(1.06) }
+}
+@keyframes cream-sheen{
+  0%,100%{ filter:saturate(1) }
+  50%{ filter:saturate(1.08) }
+}
+
+/* ปรับ .sky เดิมให้ลื่นขึ้น (ยังคงธีมและประกายเดิม) */
+.sky{ overflow:hidden; }
+/* ===== Cake drop-in animation (ตกลงมาทีละชั้น) ===== */
+.cake{
+  overflow: visible;
+}
+
+/* เริ่มต้นแต่ละส่วนอยู่นอกจอด้านบน */
+.layer-bottom,
+.layer-top,
+.cream,
+.plate,
+.candle{
+  transform: translateY(-100vh);
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+/* เคลื่อนไหวตกลงมาแบบ bounce เบา ๆ */
+@keyframes cake-drop {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  80% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* เรียงลำดับตกลงมาเป็นชั้น ๆ */
+.plate{
+  animation: cake-drop 1s ease-out 0.2s forwards;
+}
+.layer-bottom{
+  animation: cake-drop 1s ease-out 0.6s forwards;
+}
+.cream:not(.light){
+  animation: cake-drop 1s ease-out 1s forwards;
+}
+.layer-top{
+  animation: cake-drop 1s ease-out 1.4s forwards;
+}
+.cream.light{
+  animation: cake-drop 1s ease-out 1.8s forwards;
+}
+.candle{
+  animation: cake-drop 1s ease-out 2.2s forwards;
+}
+:root{
+  --bg:#0b1020;
+  --panel:#0f1834;
+  --text:#e8eefc;
+  --accent:#22d3ee;
+  --radius:16px;
+  --shadow:0 12px 28px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+body{margin:0;font-family:"Kanit",sans-serif;background:var(--bg);color:var(--text);overflow:hidden;}
+
+/* ท้องฟ้า */
+.sky{position:relative;min-height:100vh;overflow:hidden;}
+.starfield,.clouds,.moon{position:absolute;inset:0;pointer-events:none;z-index:0}
+.stars{position:absolute;inset:-10vh -10vw;background-repeat:repeat;opacity:.8}
+.layer1{background-image:radial-gradient(1px 1px at 10% 20%,#fff 40%,transparent 41%);background-size:600px 600px;animation:star-drift1 90s linear infinite,star-twinkle 6s ease-in-out infinite}
+.layer2{background-image:radial-gradient(1px 1px at 40% 60%,#8cf 40%,transparent 41%);background-size:560px 560px;animation:star-drift2 60s linear infinite,star-twinkle 7s ease-in-out infinite}
+.layer3{background-image:radial-gradient(1px 1px at 70% 30%,#aef 40%,transparent 41%);background-size:480px 480px;animation:star-drift3 40s linear infinite,star-twinkle 5s ease-in-out infinite}
+@keyframes star-drift1{to{transform:translate(-6vw,-4vh)}}
+@keyframes star-drift2{to{transform:translate(8vw,6vh)}}
+@keyframes star-drift3{to{transform:translate(-10vw,5vh)}}
+@keyframes star-twinkle{50%{opacity:.5;filter:brightness(1.2)}}
+
+.clouds{background:radial-gradient(circle at 20% 40%,rgba(255,255,255,.06),transparent 60%),radial-gradient(circle at 70% 60%,rgba(255,255,255,.05),transparent 65%);filter:blur(25px);animation:clouds-move 120s linear infinite;}
+@keyframes clouds-move{50%{transform:translate(-4vw,-2vh) scale(1.05)}}
+
+.moon{width:100%;height:100%;background:radial-gradient(circle at 80% 15%,rgba(255,255,240,.25),transparent 70%);}
+
+/* เค้ก */
+.cake-wrap{position:relative;z-index:2;text-align:center;margin-top:80px;}
+.cake{max-width:300px;width:100%;height:auto;}
+.plate{fill:url(#plateGrad,#22344a);filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+.layer{fill:#29376b;filter:url(#softShadow)}
+.cream{fill:#ffb6c1}
+.cream.light{fill:#ffd4e0}
+.candle-body{fill:#ffe07a}
+.candle-body.alt{fill:#9df}
+.wick{fill:#333}
+.fire{fill:#ffae00}
+.glow{fill:rgba(255,180,50,.6)}
+
+.float{animation:floaty 5s ease-in-out infinite;}
+@keyframes floaty{50%{transform:translateY(-6px)}}
+
+/* เค้กตกทีละชั้น */
+.plate,.layer-bottom,.cream:not(.light),.layer-top,.cream.light,.candle{transform:translateY(-100vh);opacity:0;animation-fill-mode:forwards;}
+@keyframes drop{0%{transform:translateY(-100vh);opacity:0;}80%{transform:translateY(10px);opacity:1;}100%{transform:translateY(0);opacity:1;}}
+.plate{animation:drop 1s ease-out .2s forwards;}
+.layer-bottom{animation:drop 1s ease-out .6s forwards;}
+.cream:not(.light){animation:drop 1s ease-out 1s forwards;}
+.layer-top{animation:drop 1s ease-out 1.4s forwards;}
+.cream.light{animation:drop 1s ease-out 1.8s forwards;}
+.candle{animation:drop 1s ease-out 2.2s forwards;}
+
+/* จิ้งจอก */
+.fox{
+  position:absolute;
+  bottom:60px;
+  left:-120px;
+  width:100px;
+  height:60px;
+  background:url('https://cdn.jsdelivr.net/gh/googlefonts/noto-emoji/svg/1f98a.svg') center/contain no-repeat;
+  animation:fox-walk 20s linear infinite;
+  z-index:3;
+  opacity:.95;
+}
+@keyframes fox-walk{
+  0%{transform:translateX(-120px) scaleX(1);}
+  45%{transform:translateX(100vw) scaleX(1);}
+  50%{transform:translateX(100vw) scaleX(-1);}
+  95%{transform:translateX(-120px) scaleX(-1);}
+  100%{transform:translateX(-120px) scaleX(1);}
+}
+
+/* ส่วนอื่น */
+.topbar{padding:10px 16px;text-align:center;}
+.muted{opacity:.8}
+.cta-grid{margin-top:24px;display:flex;justify-content:center;gap:12px;}
+.btn{padding:10px 18px;background:#60a5fa;border-radius:var(--radius);color:#fff;text-decoration:none;}
+.btn.ghost{background:transparent;border:1px solid #60a5fa;}
+.footer{text-align:center;padding:20px 0;opacity:.7;font-size:.9em;}
+/* ===== HBD Page (รูปภาพ + แผ่นเสียง) ===== */
+.hbd-img{
+  margin-top:20px;
+}
+.hbd-img img{
+  width:100%;
+  max-width:300px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  transition:transform .3s;
+}
+.hbd-img img:hover{
+  transform:scale(1.05);
+}
+
+/* Vinyl (แผ่นเสียง) */
+.vinyl{
+  width:120px;
+  height:120px;
+  margin:24px auto;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at center, #222 40%, #111 60%, #000 100%);
+  border:6px solid #555;
+  box-shadow:0 8px 20px rgba(0,0,0,.5);
+  cursor:pointer;
+  position:relative;
+}
+.vinyl::before{
+  content:"";
+  position:absolute;
+  top:50%; left:50%;
+  width:20px; height:20px;
+  background:#ff4d6d;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+.vinyl.spin{
+  animation:spinRecord 3s linear infinite;
+}
+@keyframes spinRecord{
+  100%{ transform:rotate(360deg); }
+}
+/* ===== HBD Page Layout ===== */
+.center{text-align:center}
+
+/* รูปอยู่ตรงกลางสวยงาม */
+.hbd-img{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top:20px;
+  margin-bottom:24px;
+}
+.hbd-img img{
+  width:220px;
+  height:auto;
+  border-radius:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);
+}
+
+/* แผ่นเสียง */
+.vinyl{
+  width:120px;
+  height:120px;
+  margin:20px auto;
+  border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, #333 30%, #111 70%);
+  box-shadow:0 0 0 8px rgba(255,255,255,.08), inset 0 0 10px rgba(0,0,0,.5);
+  cursor:pointer;
+  transition:transform .3s ease;
+}
+.vinyl::after{
+  content:"";
+  position:absolute;
+  width:24px;height:24px;
+  border-radius:50%;
+  background:#f43f5e;
+  top:calc(50% - 12px);left:calc(50% - 12px);
+}
+.vinyl:hover{transform:scale(1.05)}
+.vinyl.spin{animation:spin 3s linear infinite}
+
+@keyframes spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* ปรับภาพบนมือถือให้กว้างขึ้นเล็กน้อย */
+@media (max-width:480px){
+  .hbd-img img{width:260px}
+}
