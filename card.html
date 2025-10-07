@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Card | HBD</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#0b1020" />
+</head>
+<body class="sky">
+  <header class="topbar">
+    <button class="hamburger" aria-label="เมนู" data-menu-btn>
+      <span></span><span></span><span></span>
+    </button>
+    <h1>Birthday Card</h1>
+  </header>
+
+  <nav class="drawer" data-drawer>
+    <a href="index.html">🍰 Cake</a>
+    <a href="card.html" class="active">💌 Card</a>
+    <a href="hbd.html">🎉 HBD</a>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <h2>เปิดการ์ดอวยพร</h2>
+      <p class="muted">แตะการ์ดเพื่อพลิก</p>
+
+      <div class="card3d" data-flip>
+        <div class="card3d-face card3d-front">
+          <div class="confetti-mini" aria-hidden="true"></div>
+          <h3>💌 กดเพื่อเปิดการ์ด</h3>
+          <p>จาก: <b>เพื่อนที่แสนดี</b></p>
+          <p>ถึง: <b>[ชื่อคนเกิด]</b></p>
+        </div>
+        <div class="card3d-face card3d-back">
+          <h3>สุขสันต์วันเกิด 🎂</h3>
+          <p>
+            ขอให้ปีนี้ของคุณเต็มไปด้วยสุขภาพที่แข็งแรง<br/>
+            สิ่งดีๆ โอกาสใหม่ๆ และความสุขทุกวันนะ!
+          </p>
+          <p class="muted">— ส่งรักจากใจจริง 💖 —</p>
+        </div>
+      </div>
+
+      <div class="cta-grid">
+        <a class="btn" href="hbd.html">ไปหน้า HBD 🎉</a>
+        <a class="btn ghost" href="index.html">กลับหน้า Cake</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><small>แตะอีกครั้งเพื่อปิดการ์ด</small></footer>
+  <script src="app.js"></script>
+</body>
+</html>
