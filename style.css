@@ -112,7 +112,7 @@ a{text-decoration:none;color:inherit}
   50%{ transform:translateY(-1px) rotate(3deg) }
 }
 
-/* 3D card */
+/* 3D card (เดิมสำหรับการ์ดพลิกแบบง่าย) */
 .card3d{ width:100%; max-width:360px; height:200px; margin:16px auto; perspective:1000px; cursor:pointer }
 .card3d > div{ width:100%; height:100%; position:relative; transform-style:preserve-3d; transition: transform .6s }
 .card3d.flipped > div{ transform:rotateY(180deg) }
@@ -149,3 +149,102 @@ a{text-decoration:none;color:inherit}
 /* Canvas FX */
 .fx{ position:fixed; inset:0; pointer-events:none }
 .center{ text-align:center }
+
+/* ====== 3D Fold Card (Pure CSS) ====== */
+.visually-hidden{
+  position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+
+/* เวที 3D */
+.fold-stage{
+  display:grid; place-items:center;
+  perspective: 1400px;
+  margin: 14px auto 0;
+}
+
+/* ป้ายแนะนำคลิก */
+.tip{
+  display:inline-block; margin-bottom:10px;
+  font-size:12px; color:var(--muted);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  padding:6px 10px; border-radius:999px;
+  user-select:none; cursor:pointer;
+}
+
+/* ตัวการ์ด (กว้าง x สูง) */
+.fold-card{
+  width:min(92vw, 520px);
+  height: min(62vw, 320px);
+  max-width:520px; max-height:320px;
+  position:relative;
+  transform-style:preserve-3d;
+  display:block; cursor:pointer;
+}
+
+/* สันกลาง */
+.fc-spine{
+  position:absolute; top:0; bottom:0; left:50%; width:2px; transform:translateX(-1px);
+  background:linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.06));
+  border-left:1px solid rgba(0,0,0,.15);
+  opacity:.3; pointer-events:none;
+}
+
+/* หน้าใน (ขวา) และปก */
+.fc-page, .fc-cover{
+  position:absolute; inset:0; border-radius:14px; overflow:hidden;
+  display:grid; place-content:center; text-align:center;
+  padding:18px; box-shadow: var(--shadow);
+}
+
+/* หน้าใน (อยู่ขวา คงที่) */
+.fc-page{
+  background:
+    radial-gradient(1000px 500px at 20% -20%, rgba(96,165,250,.18), transparent 60%),
+    radial-gradient(800px 400px at 90% 0%, rgba(34,211,238,.14), transparent 60%),
+    var(--panel-2);
+  border:1px solid rgba(255,255,255,.10);
+  color:var(--text);
+  transform: translateZ(-2px);
+}
+
+/* ปก (อยู่ซ้าย พับเข้าหาหน้าใน) */
+.fc-cover{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(135deg, #ffd1e6, #c7d2fe);
+  color:#0b1020;
+  border:1px solid rgba(0,0,0,.08);
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  transition: transform .9s cubic-bezier(.22,1,.25,1), box-shadow .3s;
+}
+.fc-cover::after{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(90deg, rgba(0,0,0,.25), transparent);
+  opacity:.0; transition:opacity .8s; pointer-events:none;
+}
+
+/* เนื้อใน */
+.fc-inner{ display:grid; place-items:center; gap:10px }
+.cake-illus{ font-size:44px }
+
+/* เปิดการ์ดด้วย checkbox-hack */
+#openCard:checked ~ .fold-card .fc-cover{
+  transform: rotateY(-170deg);
+  box-shadow: 0 14px 40px rgba(0,0,0,.45);
+}
+#openCard:checked ~ .fold-card .fc-cover::after{ opacity:.25 }
+
+/* เอฟเฟกต์ตอน hover (เฉพาะจอใหญ่) */
+@media (hover:hover){
+  .fold-card:hover .fc-cover{
+    box-shadow: 0 16px 40px rgba(0,0,0,.45);
+  }
+}
+
+/* ปรับขนาดบนจอเล็กมาก */
+@media (max-width:360px){
+  .fold-card{ height: 58vw }
+}
