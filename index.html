@@ -26,8 +26,15 @@
       <h2>เค้กวันเกิด</h2>
       <p class="muted">แตะที่ “เทียน” เพื่อจุด/ดับไฟ ✨</p>
 
+      <!-- พื้นหลังดวงดาวแบบหลายชั้น (parallax) -->
+      <div class="starfield" aria-hidden="true">
+        <div class="stars layer1"></div>
+        <div class="stars layer2"></div>
+        <div class="stars layer3"></div>
+      </div>
+
       <!-- เค้ก SVG (แตะเทียนได้) -->
-      <div class="cake-wrap">
+      <div class="cake-wrap float">
         <svg viewBox="0 0 360 260" class="cake" aria-label="Birthday cake">
           <!-- จาน -->
           <ellipse cx="180" cy="230" rx="130" ry="16" class="plate" />
@@ -41,7 +48,7 @@
                 class="cream light"/>
 
           <!-- เทียน 3 แท่ง -->
-          <g class="candle" data-candle transform="translate(140,80)">
+          <g class="candle glow" data-candle transform="translate(140,80)">
             <rect x="0" y="0" width="14" height="35" rx="3" class="candle-body"/>
             <rect x="6" y="-6" width="2" height="8" class="wick"/>
             <g class="flame" data-flame>
@@ -50,7 +57,7 @@
             </g>
           </g>
 
-          <g class="candle" data-candle transform="translate(173,72)">
+          <g class="candle glow" data-candle transform="translate(173,72)">
             <rect x="0" y="0" width="14" height="43" rx="3" class="candle-body alt"/>
             <rect x="6" y="-6" width="2" height="8" class="wick"/>
             <g class="flame" data-flame>
@@ -59,7 +66,7 @@
             </g>
           </g>
 
-          <g class="candle" data-candle transform="translate(206,80)">
+          <g class="candle glow" data-candle transform="translate(206,80)">
             <rect x="0" y="0" width="14" height="35" rx="3" class="candle-body"/>
             <rect x="6" y="-6" width="2" height="8" class="wick"/>
             <g class="flame" data-flame>
