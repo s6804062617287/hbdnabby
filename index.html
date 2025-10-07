@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Cake | HBD</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#0b1020" />
+</head>
+<body class="sky">
+  <header class="topbar">
+    <button class="hamburger" aria-label="เมนู" data-menu-btn>
+      <span></span><span></span><span></span>
+    </button>
+    <h1>Happy Birthday</h1>
+  </header>
+
+  <nav class="drawer" data-drawer>
+    <a href="index.html" class="active">🍰 Cake</a>
+    <a href="card.html">💌 Card</a>
+    <a href="hbd.html">🎉 HBD</a>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <h2>เค้กวันเกิด</h2>
+      <p class="muted">แตะที่ “เทียน” เพื่อจุด/ดับไฟ ✨</p>
+
+      <!-- เค้ก SVG (แตะเทียนได้) -->
+      <div class="cake-wrap">
+        <svg viewBox="0 0 360 260" class="cake" aria-label="Birthday cake">
+          <!-- จาน -->
+          <ellipse cx="180" cy="230" rx="130" ry="16" class="plate" />
+          <!-- ชั้นเค้กล่าง -->
+          <rect x="60" y="150" width="240" height="60" rx="14" class="layer layer-bottom"/>
+          <path d="M60 160 h240 v20 c-10 8 -30 8 -40 0 s-30 -8 -40 0 s-30 8 -40 0 s-30 -8 -40 0 s-30 8 -40 0 v-20z"
+                class="cream"/>
+          <!-- ชั้นเค้กบน -->
+          <rect x="90" y="105" width="180" height="50" rx="12" class="layer layer-top"/>
+          <path d="M90 115 h180 v16 c-10 7 -25 7 -35 0 s-25 -7 -35 0 s-25 7 -35 0 s-25 -7 -35 0 s-25 7 -35 0 v-16z"
+                class="cream light"/>
+
+          <!-- เทียน 3 แท่ง -->
+          <g class="candle" data-candle transform="translate(140,80)">
+            <rect x="0" y="0" width="14" height="35" rx="3" class="candle-body"/>
+            <rect x="6" y="-6" width="2" height="8" class="wick"/>
+            <g class="flame" data-flame>
+              <path d="M7 -18 C2 -10, 4 -6, 7 -4 C10 -6, 12 -10, 7 -18 Z" class="fire"/>
+              <circle cx="7" cy="-9" r="3" class="glow"/>
+            </g>
+          </g>
+
+          <g class="candle" data-candle transform="translate(173,72)">
+            <rect x="0" y="0" width="14" height="43" rx="3" class="candle-body alt"/>
+            <rect x="6" y="-6" width="2" height="8" class="wick"/>
+            <g class="flame" data-flame>
+              <path d="M7 -18 C2 -10, 4 -6, 7 -4 C10 -6, 12 -10, 7 -18 Z" class="fire"/>
+              <circle cx="7" cy="-9" r="3" class="glow"/>
+            </g>
+          </g>
+
+          <g class="candle" data-candle transform="translate(206,80)">
+            <rect x="0" y="0" width="14" height="35" rx="3" class="candle-body"/>
+            <rect x="6" y="-6" width="2" height="8" class="wick"/>
+            <g class="flame" data-flame>
+              <path d="M7 -18 C2 -10, 4 -6, 7 -4 C10 -6, 12 -10, 7 -18 Z" class="fire"/>
+              <circle cx="7" cy="-9" r="3" class="glow"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cta-grid">
+        <a class="btn" href="card.html">ไปหน้า Card 💌</a>
+        <a class="btn ghost" href="hbd.html">ไปหน้า HBD 🎉</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>ธีม: Sky &amp; Galaxy animation • ทำสำหรับมือถือ</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
