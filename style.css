@@ -618,3 +618,51 @@ body{margin:0;font-family:"Kanit",sans-serif;background:var(--bg);color:var(--te
     max-width: 300px;       /* ลดขนาดบนจอเล็ก */
   }
 }
+/* ===== รูปวาดกลางจอ ===== */
+.art-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.art-wrap img {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  transition: all .4s ease;
+  cursor: pointer;
+}
+
+/* ขยายเต็มจอเมื่อกด */
+.art-wrap img.zoomed {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.8);
+  max-width: 95vw;
+  max-height: 90vh;
+  z-index: 999;
+  border-radius: 10px;
+  box-shadow: 0 0 40px rgba(0,0,0,.7);
+}
+
+/* มืดพื้นหลังเมื่อขยาย */
+.art-wrap img.zoomed::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+}
+
+/* มือถือ: ปรับขนาดให้พอดี */
+@media (max-width:480px) {
+  .art-wrap img {
+    max-width: 300px;
+  }
+  .art-wrap img.zoomed {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
