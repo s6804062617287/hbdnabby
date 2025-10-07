@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Card | HBD</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
   <meta name="theme-color" content="#0b1020" />
 </head>
 <body class="sky">
@@ -22,35 +22,53 @@
   </nav>
 
   <main class="container">
-    <section class="hero">
-      <h2>เปิดการ์ดอวยพร</h2>
-      <p class="muted">แตะการ์ดเพื่อพลิก</p>
+    <section class="hero center">
+      <h2>การ์ดพับ 3D (Pure CSS)</h2>
+      <p class="muted">แตะที่ “ปกการ์ด” เพื่อเปิด–ปิด เหมือนกระดาษจริง</p>
 
-      <div class="card3d" data-flip>
-        <div class="card3d-face card3d-front">
-          <div class="confetti-mini" aria-hidden="true"></div>
-          <h3>💌 กดเพื่อเปิดการ์ด</h3>
-          <p>จาก: <b>เพื่อนที่แสนดี</b></p>
-          <p>ถึง: <b>[ชื่อคนเกิด]</b></p>
-        </div>
-        <div class="card3d-face card3d-back">
-          <h3>สุขสันต์วันเกิด 🎂</h3>
-          <p>
-            ขอให้ปีนี้ของคุณเต็มไปด้วยสุขภาพที่แข็งแรง<br/>
-            สิ่งดีๆ โอกาสใหม่ๆ และความสุขทุกวันนะ!
-          </p>
-          <p class="muted">— ส่งรักจากใจจริง 💖 —</p>
-        </div>
+      <!-- เวที 3D + ตัวเปิดปิด -->
+      <div class="fold-stage">
+        <input id="openCard" type="checkbox" class="visually-hidden">
+
+        <!-- ป้าย tip เล็กๆ -->
+        <label class="tip" for="openCard">แตะเพื่อเปิด/ปิดการ์ด</label>
+
+        <!-- ตัวการ์ด (ใช้ label ครอบ เพื่อง่ายต่อการคลิก) -->
+        <label class="fold-card" for="openCard" aria-label="กดเพื่อเปิด/ปิดการ์ด">
+          <!-- สันกลาง -->
+          <div class="fc-spine" aria-hidden="true"></div>
+
+          <!-- ปก (พับได้) -->
+          <article class="fc-cover" aria-label="ปกการ์ด">
+            <div class="fc-inner">
+              <h3>HAPPY BIRTHDAY 🎉</h3>
+              <div class="cake-illus">🎂</div>
+              <p class="muted">เปิดการ์ดดูข้างในเลย</p>
+            </div>
+          </article>
+
+          <!-- หน้าด้านใน (อยู่ขวา) -->
+          <article class="fc-page" aria-label="ด้านในของการ์ด">
+            <div class="fc-inner">
+              <h3>ถึง [ชื่อคนเกิด] 💖</h3>
+              <p>
+                สุขสันต์วันเกิดนะ! ขอให้ปีนี้เต็มไปด้วย<br>
+                โอกาสดี ๆ ความสุข และสุขภาพแข็งแรง ✨
+              </p>
+              <p class="muted">— จาก [ชื่อผู้ให้] —</p>
+            </div>
+          </article>
+        </label>
       </div>
 
-      <div class="cta-grid">
+      <div class="cta-grid" style="margin-top:18px">
         <a class="btn" href="hbd.html">ไปหน้า HBD 🎉</a>
         <a class="btn ghost" href="index.html">กลับหน้า Cake</a>
       </div>
     </section>
   </main>
 
-  <footer class="footer"><small>แตะอีกครั้งเพื่อปิดการ์ด</small></footer>
+  <footer class="footer"><small>การ์ดพับ 3D ด้วย CSS ล้วน ๆ</small></footer>
   <script src="app.js"></script>
 </body>
 </html>
